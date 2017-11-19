@@ -1,6 +1,7 @@
 package com.example.bbs_llsif;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -56,6 +57,21 @@ public class Regist extends AppCompatActivity {
                 registTask.execute(name, password);
             }
         });
+
+        btn_longin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name=String .valueOf(et_username.getText());
+                String password=String .valueOf(et_password.getText());
+                LoginTask loginTask = new LoginTask();
+                loginTask.execute(name, password);
+                if ((tv_regist.getText().toString()) == "登录成功") {
+                    Intent loginIntent = new Intent(Regist.this, MainActivity.class);
+                    startActivity(loginIntent);
+                    finish();
+                }
+            }
+        });
     }
 }
 
@@ -100,7 +116,66 @@ class RegistTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        Regist.tv_regist.setText(String.valueOf(s));
+        Gson backjson = new Gson();
+        RegistBackJson registBackJson = backjson.fromJson(s, RegistBackJson.class);
+
+        if (registBackJson.getSuccess() == true) {
+            Regist.tv_regist.setText("注册成功");
+        } else {
+            Regist.tv_regist.setText("错误：用户名已注册");
+        }
     }
 }
+
+class LoginTask extends AsyncTask<String, Integer, String> {
+    @Override
+    protected String doInBackground(String... strings) {
+        Gson registgson = new Gson();
+        RegistJson registJson = new RegistJson();
+        registJson.setName(strings[0]);
+        registJson.setPassword(strings[1]);
+        String sendjson = registgson.toJson(registJson);
+        return this.doPost("https://bbs.llsif.cn/main.php/login", sendjson);
+    }
+
+    public String doPost(String url, String Json){
+        String result = "";
+        try {
+            URL realurl = new URL(url);
+            HttpsURLConnection con = (HttpsURLConnection) realurl.openConnection();
+            con.setReadTimeout(6000);
+            con.setRequestMethod("POST");
+            OutputStream out = con.getOutputStream();
+            out.write(Json.getBytes());
+            out.flush();
+            out.close();InputStream in = con.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+            String line = "";
+            while ((line =reader.readLine())!=null) {
+                result = line;
+            }
+        } catch (MalformedURLException eio) {
+            eio.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+        Gson backjson = new Gson();
+        RegistBackJson registBackJson = backjson.fromJson(s, RegistBackJson.class);
+         if (registBackJson.getSuccess() == true) {
+             Regist.tv_regist.setText("登录成功");
+         } else {
+             Regist.tv_regist.setText("错误：用户名或密码错误");
+         }
+
+    }
+}
+
 
