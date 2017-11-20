@@ -58,8 +58,11 @@ public class Regist extends AppCompatActivity {
             public void onClick(View v) {
                 String name=String .valueOf(et_username.getText());
                 String password=String .valueOf(et_password.getText());
+
+                //注册
                 RegistTask registTask = new RegistTask();
                 registTask.execute(name, password);
+
             }
         });
 
@@ -68,6 +71,9 @@ public class Regist extends AppCompatActivity {
             public void onClick(View v) {
                 String name=String .valueOf(et_username.getText());
                 String password=String .valueOf(et_password.getText());
+                Toast.makeText(Regist.this,"登录中···",Toast.LENGTH_SHORT).show();
+
+                //登录
                 LoginTask loginTask = new LoginTask();
                 loginTask.execute(name, password);
             }
@@ -80,18 +86,21 @@ public class Regist extends AppCompatActivity {
         super.onDestroy();
     }
 }
-
+//异步任务 注册
 class RegistTask extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... strings) {
+
+        //JSON转换
         Gson registgson = new Gson();
         RegistJson registJson = new RegistJson();
         registJson.setName(strings[0]);
         registJson.setPassword(strings[1]);
         String sendjson = registgson.toJson(registJson);
+
         return this.doPost("https://bbs.llsif.cn/main.php/regist", sendjson);
     }
-
+        //网络请求 及返回信息
     public String doPost(String url, String Json){
         String result = "";
         try {
@@ -118,21 +127,26 @@ class RegistTask extends AsyncTask<String, Integer, String> {
         return result;
     }
 
+    //解释返回的信息
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
+
         Gson backjson = new Gson();
         RegistBackJson registBackJson = backjson.fromJson(s, RegistBackJson.class);
+        //获得context
+        Context contenx=Regist.context;
 
+        //通过Success 判断
         if (registBackJson.getSuccess() == true) {
-            Regist.tv_regist.setText("注册成功");
+            Toast.makeText(contenx,"注册成功",Toast.LENGTH_SHORT).show();
         } else {
-            Regist.tv_regist.setText("错误：用户名已注册");
+            Toast.makeText(contenx,registBackJson.getMessage().toString(),Toast.LENGTH_SHORT).show();
         }
     }
 }
-
+//异步任务 登录 （大体与注册一直）
 class LoginTask extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... strings) {
@@ -175,14 +189,17 @@ class LoginTask extends AsyncTask<String, Integer, String> {
 
         Gson backjson = new Gson();
         RegistBackJson registBackJson = backjson.fromJson(s, RegistBackJson.class);
-         if (registBackJson.getSuccess() == true) {
-             Regist.tv_regist.setText("登录成功");
-             Context contenx=Regist.context;
-             Intent login = new Intent(contenx, MainActivity.class);
-             contenx.startActivity(login);
+        Context contenx=Regist.context;
 
+         if (registBackJson.getSuccess() == true) {
+             Toast.makeText(contenx, "登录成功", Toast.LENGTH_SHORT).show();
+
+             //跳转到MainActivi，并发送用户数据（主要是 User_id 和 Session ）
+             Intent login = new Intent(contenx, MainActivity.class);
+             login.putExtra("user_message",s);
+             contenx.startActivity(login);
          } else {
-             Regist.tv_regist.setText("错误：用户名或密码错误");
+             Toast.makeText(contenx,registBackJson.getMessage().toString(),Toast.LENGTH_SHORT).show();
          }
 
     }
