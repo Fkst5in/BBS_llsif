@@ -2,7 +2,6 @@ package com.example.bbs_llsif;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaCas;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,15 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
+import java.util.HashMap;
 
 public class PostActivity extends AppCompatActivity {
     EditText et_title,et_content;
@@ -61,47 +52,23 @@ class PostTask extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String url="https://bbs.llsif.cn/main.php/post";
         Gson gson = new Gson();
         PostJson postJson = new PostJson();
         postJson.setTitle(strings[0]);
         postJson.setContent(strings[1]);
         String sendJson = gson.toJson(postJson);
-        return this.doPost(url,strings[2],strings[3],sendJson);
-    }
-    public String doPost(String url,String User_id,String Session, String Json){
-        String result = "";
-        try {
-            URL realurl = new URL(url);
-            HttpsURLConnection con = (HttpsURLConnection) realurl.openConnection();
-            con.setReadTimeout(6000);
-            con.setRequestMethod("POST");
-            con.setRequestProperty("User_id",User_id);
-            con.setRequestProperty("Session",Session);
-            OutputStream out = con.getOutputStream();
-            out.write(Json.getBytes());
-            out.flush();
-            out.close();
-            InputStream in = con.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-            String line = "";
-            while ((line =reader.readLine())!=null) {
-                result = line;
-            }
-        } catch (MalformedURLException eio) {
-            eio.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+        HashMap<String, String> header = new HashMap<String, String>();
+        header.put("User-ID", strings[2]);
+        header.put("Session", strings[3]);
+
+        return Poster.post("https://bbs.llsif.cn/main.php/post", sendJson, header);
     }
 
     //解释返回的信息
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-
 
         Gson backjson = new Gson();
         PostBackJson postBackJson = backjson.fromJson(s, PostBackJson.class);

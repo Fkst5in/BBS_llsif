@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -18,13 +19,16 @@ import javax.net.ssl.HttpsURLConnection;
  */
 
 public class Poster {
-    public static String post(String url, String body, String[] header) {
+    public static String post(String url, String body, Map<String,String> header) {
         String result = "";
         try {
             URL url_ = new URL(url);
             HttpsURLConnection con = (HttpsURLConnection) url_.openConnection();
             con.setReadTimeout(6000);
             con.setRequestMethod("POST");
+            for(Map.Entry<String, String> entry:header.entrySet()){
+                con.setRequestProperty(entry.getKey(), entry.getValue());
+            }
             OutputStream out = con.getOutputStream();
             out.write(body.getBytes());
             out.flush();

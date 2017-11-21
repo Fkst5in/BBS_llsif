@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+
 
 public class Regist extends AppCompatActivity {
 
@@ -87,8 +89,7 @@ class RegistTask extends AsyncTask<String, Integer, String> {
         registJson.setName(strings[0]);
         registJson.setPassword(strings[1]);
         String sendjson = registgson.toJson(registJson);
-        String[] header = {};
-        return Poster.post("https://bbs.llsif.cn/main.php/regist", sendjson, header);
+        return Poster.post("https://bbs.llsif.cn/main.php/regist", sendjson, new HashMap<String, String>());
     }
 
     //解释返回的信息
@@ -133,8 +134,7 @@ class LoginTask extends AsyncTask<String, Integer, String> {
         registJson.setPassword(strings[1]);
         String sendjson = registgson.toJson(registJson);
 
-        String[] header = {};
-        return Poster.post("https://bbs.llsif.cn/main.php/login", sendjson, header);
+        return Poster.post("https://bbs.llsif.cn/main.php/login", sendjson, new HashMap<String, String>());
     }
 
     @Override
