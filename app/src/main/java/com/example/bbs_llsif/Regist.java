@@ -97,41 +97,14 @@ class RegistTask extends AsyncTask<String, Integer, String> {
         registJson.setName(strings[0]);
         registJson.setPassword(strings[1]);
         String sendjson = registgson.toJson(registJson);
-
-        return this.doPost("https://bbs.llsif.cn/main.php/regist", sendjson);
-    }
-        //网络请求 及返回信息
-    public String doPost(String url, String Json){
-        String result = "";
-        try {
-            URL realurl = new URL(url);
-            HttpsURLConnection con = (HttpsURLConnection) realurl.openConnection();
-            con.setReadTimeout(6000);
-            con.setRequestMethod("POST");
-            OutputStream out = con.getOutputStream();
-            out.write(Json.getBytes());
-            out.flush();
-            out.close();
-            InputStream in = con.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-            String line = "";
-            while ((line =reader.readLine())!=null) {
-                result = line;
-            }
-        } catch (MalformedURLException eio) {
-            eio.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+        String[] header = {};
+        return Poster.post("https://bbs.llsif.cn/main.php/regist", sendjson, header);
     }
 
     //解释返回的信息
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-
 
         Gson backjson = new Gson();
         RegistBackJson registBackJson = backjson.fromJson(s, RegistBackJson.class);
@@ -155,32 +128,9 @@ class LoginTask extends AsyncTask<String, Integer, String> {
         registJson.setName(strings[0]);
         registJson.setPassword(strings[1]);
         String sendjson = registgson.toJson(registJson);
-        return this.doPost("https://bbs.llsif.cn/main.php/login", sendjson);
-    }
 
-    public String doPost(String url, String Json){
-        String result = "";
-        try {
-            URL realurl = new URL(url);
-            HttpsURLConnection con = (HttpsURLConnection) realurl.openConnection();
-            con.setReadTimeout(6000);
-            con.setRequestMethod("POST");
-            OutputStream out = con.getOutputStream();
-            out.write(Json.getBytes());
-            out.flush();
-            out.close();InputStream in = con.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-            while ((line =reader.readLine())!=null) {
-                result = line;
-            }
-
-        } catch (MalformedURLException eio) {
-            eio.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+        String[] header = {};
+        return Poster.post("https://bbs.llsif.cn/main.php/login", sendjson, header);
     }
 
     @Override
