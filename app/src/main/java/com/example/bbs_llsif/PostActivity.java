@@ -25,7 +25,7 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         et_title = (EditText) findViewById(R.id.et_title);
-        et_content = (EditText) findViewById(R.id.et_title);
+        et_content = (EditText) findViewById(R.id.et_content);
         btn_post = (Button) findViewById(R.id.btn_post);
 
         postcontext=this;
