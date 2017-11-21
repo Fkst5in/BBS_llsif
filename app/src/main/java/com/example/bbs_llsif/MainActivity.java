@@ -14,7 +14,8 @@ import com.google.gson.Gson;
 public class MainActivity extends AppCompatActivity {
 
     TextView text;
-    String user_message_json;
+    String user_id;
+    String session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +26,24 @@ public class MainActivity extends AppCompatActivity {
 
         //获得用户数据（主要是 User_id 和 Session）
         Intent intent = getIntent();
-        user_message_json = intent.getStringExtra("user_message");
+        user_id = intent.getStringExtra("user_id");
+        session = intent.getStringExtra("session");
+        Boolean skip = intent.getBooleanExtra("skip", false);
 
-        //结束登录Activi
-        Regist.sentence.finish();
-
+        //结束登录Activity
+        if(!skip) {
+            Regist.sentence.finish();
+        }
         init();
 
-        //按钮 转向PostActivi
+        //按钮 转向PostActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent postIntent = new Intent(getApplicationContext(), PostActivity.class);
-                postIntent.putExtra("user_message", user_message_json);
+                postIntent.putExtra("user_id", user_id);
+                postIntent.putExtra("session", session);
                 startActivity(postIntent);
             }
         });
@@ -52,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doit() {
-        Gson gson = new Gson();
-        RegistBackJson user_message = gson.fromJson(user_message_json, RegistBackJson.class);
-        text.setText("User_id:" + user_message.getUser_id() + "\n" + "Session:" + user_message.getSession());
+        text.setText("User_id:" + user_id + "\n" + "Session:" + session);
     }
 
 }

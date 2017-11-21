@@ -40,9 +40,8 @@ public class PostActivity extends AppCompatActivity {
         postcontext=this;
 
         Intent intent = getIntent();
-        String user_message_json = intent.getStringExtra("user_message");
-        Gson gson = new Gson();
-        final RegistBackJson user_message = gson.fromJson(user_message_json, RegistBackJson.class);
+        final String user_id = intent.getStringExtra("user_id");
+        final String session = intent.getStringExtra("session");
 
         btn_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +50,7 @@ public class PostActivity extends AppCompatActivity {
                 String content = et_content.getText().toString();
 
                 PostTask postTask = new PostTask();
-                postTask.execute(title, content, user_message.getUser_id(), user_message.getSession());
+                postTask.execute(title, content, user_id, session);
 
             }
         });

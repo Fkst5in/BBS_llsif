@@ -3,6 +3,7 @@ package com.example.bbs_llsif;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -16,17 +17,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class Regist extends AppCompatActivity {
 
@@ -109,13 +99,27 @@ class RegistTask extends AsyncTask<String, Integer, String> {
         Gson backjson = new Gson();
         RegistBackJson registBackJson = backjson.fromJson(s, RegistBackJson.class);
         //获得context
-        Context contenx=Regist.context;
+        Context context_=Regist.context;
 
         //通过Success 判断
         if (registBackJson.getSuccess() == true) {
-            Toast.makeText(contenx,"注册成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context_,"注册成功",Toast.LENGTH_SHORT).show();
+            //储存session数据到本地
+            SharedPreferences sessionStorage = context_.getSharedPreferences("main", 0);
+            SharedPreferences.Editor editor = sessionStorage.edit();
+            editor.putString("user_id", registBackJson.getUser_id());
+            editor.putString("session", registBackJson.getSession());
+            editor.putString("expire", registBackJson.getExpire());
+            editor.putString("name", registBackJson.getName());
+            editor.commit();
+
+            //跳转到MainActivity，并发送用户数据（主要是 User_id 和 Session ）
+            Intent login = new Intent(context_, MainActivity.class);
+            login.putExtra("user_id", registBackJson.getUser_id());
+            login.putExtra("session", registBackJson.getSession());
+            context_.startActivity(login);
         } else {
-            Toast.makeText(contenx,registBackJson.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(context_,registBackJson.getMessage().toString(),Toast.LENGTH_SHORT).show();
         }
     }
 }
@@ -139,17 +143,26 @@ class LoginTask extends AsyncTask<String, Integer, String> {
 
         Gson backjson = new Gson();
         RegistBackJson registBackJson = backjson.fromJson(s, RegistBackJson.class);
-        Context contenx=Regist.context;
+        Context context_ = Regist.context;
 
          if (registBackJson.getSuccess() == true) {
-             Toast.makeText(contenx, "登录成功", Toast.LENGTH_SHORT).show();
+             Toast.makeText(context_, "登录成功", Toast.LENGTH_SHORT).show();
+            //储存session数据到本地
+             SharedPreferences sessionStorage = context_.getSharedPreferences("main", 0);
+             SharedPreferences.Editor editor = sessionStorage.edit();
+             editor.putString("user_id", registBackJson.getUser_id());
+             editor.putString("session", registBackJson.getSession());
+             editor.putString("expire", registBackJson.getExpire());
+             editor.putString("name", registBackJson.getName());
+             editor.commit();
 
-             //跳转到MainActivi，并发送用户数据（主要是 User_id 和 Session ）
-             Intent login = new Intent(contenx, MainActivity.class);
-             login.putExtra("user_message",s);
-             contenx.startActivity(login);
+             //跳转到MainActivity，并发送用户数据（主要是 User_id 和 Session ）
+             Intent login = new Intent(context_, MainActivity.class);
+             login.putExtra("user_id", registBackJson.getUser_id());
+             login.putExtra("session", registBackJson.getSession());
+             context_.startActivity(login);
          } else {
-             Toast.makeText(contenx,registBackJson.getMessage().toString(),Toast.LENGTH_SHORT).show();
+             Toast.makeText(context_,registBackJson.getMessage().toString(),Toast.LENGTH_SHORT).show();
          }
 
     }
