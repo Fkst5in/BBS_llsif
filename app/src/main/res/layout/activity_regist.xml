@@ -10,23 +10,23 @@
         android:id="@+id/et_username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
         android:ems="10"
-        android:hint="username"
+        android:hint="用户名"
         android:inputType="textPersonName"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/et_password"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="98dp" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="39dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="密码"
         android:inputType="numberPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btn_regist"
         app:layout_constraintTop_toBottomOf="@+id/et_username"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
@@ -35,7 +35,7 @@
         android:id="@+id/btn_regist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="regist"
+        android:text="注册"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
@@ -44,24 +44,27 @@
         app:layout_constraintVertical_bias="0.226" />
 
     <Button
-    android:id="@+id/btn_login"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="login"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.7"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/et_password" />
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.699"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_password"
+        app:layout_constraintVertical_bias="0.228" />
 
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Welcome"
-        android:textSize="23dp"
+        android:layout_marginTop="30dp"
+        android:text="登录或注册"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
