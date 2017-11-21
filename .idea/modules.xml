@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BBS_llsif.iml" filepath="$PROJECT_DIR$/BBS_llsif.iml" />
       <module fileurl="file://F:\bbs\BBS_llsif.iml" filepath="F:\bbs\BBS_llsif.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bbs.iml" filepath="$PROJECT_DIR$/bbs.iml" />
+      <module fileurl="file://C:\Users\ad_j\AndroidStudioProjects\BBS_llsif\bbs.iml" filepath="C:\Users\ad_j\AndroidStudioProjects\BBS_llsif\bbs.iml" />
     </modules>
   </component>
 </project>
