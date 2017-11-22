@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         btn_MainUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //获得mAdapter对象
                 MyAdapter mAdapter = new MyAdapter(getApplicationContext());
                 //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
                 new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
@@ -99,9 +100,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         btn_MainUpdate = (Button) findViewById(R.id.btn_MainUpdate);
-
-
-
 
 
         setSupportActionBar(toolbar);

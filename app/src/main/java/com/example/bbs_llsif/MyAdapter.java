@@ -63,9 +63,9 @@ public class MyAdapter extends BaseAdapter{
         }
 
         final Sub_List_1 sub_list_1 = List.get(position);
-        holder.it_title.setText(String.valueOf(sub_list_1.getTitle()));
+        holder.it_title.setText(String.valueOf(sub_list_1.getTitle())+" ");
         holder.it_content.setText(String.valueOf(sub_list_1.getSummary()));
-        holder.it_username.setText(String.valueOf(sub_list_1.getUser_name()));
+        holder.it_username.setText("by "+String.valueOf(sub_list_1.getUser_name()));
         holder.it_timePost.setText(String.valueOf(sub_list_1.getInsert_date()));
         holder.it_timeReply.setText(String.valueOf(sub_list_1.getLast_reply()));
 

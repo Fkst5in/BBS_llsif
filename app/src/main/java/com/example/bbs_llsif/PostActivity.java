@@ -56,12 +56,16 @@ class PostTask extends AsyncTask<String, Integer, String> {
         PostJson postJson = new PostJson();
         postJson.setTitle(strings[0]);
         postJson.setContent(strings[1]);
-
         String sendJson = gson.toJson(postJson);
+
+        System.out.println(sendJson.toString());
+
         System.out.println("result::"+sendJson.toString());
         HashMap<String, String> header = new HashMap<String, String>();
         header.put("User-ID", strings[2]);
         header.put("Session", strings[3]);
+
+
 
         return Poster.post("https://bbs.llsif.cn/main.php/post", sendJson, header);
     }
@@ -71,10 +75,14 @@ class PostTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
+        System.out.println(s);
+
         Gson backjson = new Gson();
         PostBackJson postBackJson = backjson.fromJson(s, PostBackJson.class);
         //获得context
         Context contenx=PostActivity.postcontext;
+
+
 
         //通过Success 判断
         if (postBackJson.getSuccess() == true) {

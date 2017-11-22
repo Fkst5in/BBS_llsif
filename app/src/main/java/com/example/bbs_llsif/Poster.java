@@ -20,6 +20,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Poster {
     public static String post(String url, String body, Map<String,String> header) {
+        System.out.println("HTTP Request: "+ body);
         String result = "";
         try {
             URL url_ = new URL(url);
@@ -27,6 +28,7 @@ public class Poster {
             con.setReadTimeout(6000);
             con.setRequestMethod("POST");
             for(Map.Entry<String, String> entry:header.entrySet()){
+                System.out.println("HTTP Add Header: "+ entry.getKey() + " - " + entry.getValue());
                 con.setRequestProperty(entry.getKey(), entry.getValue());
             }
             OutputStream out = con.getOutputStream();
@@ -48,6 +50,8 @@ public class Poster {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("HTTP Response: " + result);
         return result;
     }
 }

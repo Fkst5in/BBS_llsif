@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +10,10 @@
 
     <ListView
         android:id="@+id/lv_sub"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        />
-</android.support.constraint.ConstraintLayout>
+        android:layout_width="330dp"
+        android:layout_height="1500dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/list"
+        tools:ignore="MissingConstraints" />
+</RelativeLayout>

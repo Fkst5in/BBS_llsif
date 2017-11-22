@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -32,6 +33,7 @@ public class ListThread extends Thread {
     android.os.Handler listHandler;
     ListView listView;
     MyAdapter adapter;
+    List<Sub_List_1> data;
 
 
 
@@ -44,53 +46,25 @@ public class ListThread extends Thread {
         this.listView = listView;
     }
 
-    private String dopsot() {
-        String result = "";
-        try {
-            URL url_ = new URL(url);
-            HttpsURLConnection con = (HttpsURLConnection) url_.openConnection();
-            con.setReadTimeout(6000);
-            con.setRequestMethod("POST");
-            for(Map.Entry<String, String> entry:header.entrySet()){
-               con.setRequestProperty(entry.getKey(), entry.getValue());
-            }
-            OutputStream out = con.getOutputStream();
-            out.write(body.getBytes());
-            out.flush();
-            out.close();
-            InputStream in = con.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    private void dopsot() {
+         String result = Poster.post(url, body, header);
 
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                result = line;
-            }
+         Sub_List_0 sub_list_0 = new Gson().fromJson(result, Sub_List_0.class);
+         data= sub_list_0.getPosts();
+         listHandler.post(new Runnable() {
+             @Override
+             public void run() {
+                 adapter.setData(data);
+                 listView.setAdapter(adapter);
+             }
+         });
 
-            System.out.println("result::"+result.toString());
 
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
     }
 
     @Override
     public void run() {
         super.run();
-        String message=dopsot();
-        Sub_List_0 sub_list_0 = new Gson().fromJson(message, Sub_List_0.class);
-        final List<Sub_List_1> data = sub_list_0.getPosts();
-
-        listHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setData(data);
-                listView.setAdapter(adapter);
-            }
-        });
+        dopsot();
     }
 }

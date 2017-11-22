@@ -64,7 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        app:backgroundTint="@color/colorAccent"
-        app:srcCompat="@mipmap/add" />
+        app:backgroundTint="#EFEFEF"
+        app:rippleColor="@color/colorAccent"
+        app:srcCompat="@mipmap/add_g" />
 
 </android.support.design.widget.CoordinatorLayout>
