@@ -38,7 +38,7 @@ public class StartScreen extends AppCompatActivity {
                     main.putExtra("session", session);
                     main.putExtra("skip", true);
                     startActivity(main);
-
+                    finish();
                 }
 
 

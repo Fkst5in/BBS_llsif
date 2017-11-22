@@ -62,9 +62,8 @@ public class MyAdapter extends BaseAdapter{
             holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
         }
 
-        Sub_List_1 sub_list_1 = List.get(position);
+        final Sub_List_1 sub_list_1 = List.get(position);
         holder.it_title.setText(String.valueOf(sub_list_1.getTitle()));
-
         holder.it_content.setText(String.valueOf(sub_list_1.getSummary()));
         holder.it_username.setText(String.valueOf(sub_list_1.getUser_name()));
         holder.it_timePost.setText(String.valueOf(sub_list_1.getInsert_date()));
@@ -74,7 +73,9 @@ public class MyAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Intent detail = new Intent(context, DetailActivity.class);
-                detail.putExtra("message", "lalalalalalala");
+                System.out.println("user_id:"+sub_list_1.getUser_id()+"\npid:"+sub_list_1.getPid());
+                detail.putExtra("pid", sub_list_1.getPid());
+                detail.putExtra("user_id", sub_list_1.getUser_id());
                 context.startActivity(detail);
             }
         });

@@ -34,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
     String user_id;
     String session;
-    List<Sub_List_1> Sub_List;
-    static Context listContext;
-    private Handler listHandler = new Handler();
 
     ListView lv_sub;
+    Toolbar toolbar;
+    FloatingActionButton fab;
+    Button btn_MainUpdate;
+
+    private Handler listHandler = new Handler();
+
+
     ArrayList<HashMap<String, Object>> mData = new ArrayList<HashMap<String, Object>>();
 
     @Override
@@ -46,10 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lv_sub = (ListView) findViewById(R.id.lv_sub);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         //获得用户数据（主要是 User_id 和 Session）
         Intent intent = getIntent();
@@ -61,25 +63,49 @@ public class MainActivity extends AppCompatActivity {
         if(!skip) {
             Regist.sentence.finish();
         }
-        listContext = this;
 
+        init();
 
-        MyAdapter mAdapter = new MyAdapter(this);
-
+        //获得帖子上线的json文件。。。。。汗
         Gson gson = new Gson();
         Limit limit = new Limit();
         limit.setLimit(30);
-        String body = gson.toJson(limit, Limit.class);
-
-        HashMap<String, String> header = new HashMap<String, String>();
+        final String body = gson.toJson(limit, Limit.class);
+        //获得http header文件//以HashMap<String, String> header形式
+         final HashMap<String, String> header = new HashMap<String, String>();
         header.put("User-ID", user_id);
         header.put("Session", session);
-
+        //获得mAdapter对象
+        MyAdapter mAdapter = new MyAdapter(this);
+        //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
         new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
         System.out.println("ok");
 
-        //按钮 转向PostActivity
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        btn_MainUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyAdapter mAdapter = new MyAdapter(getApplicationContext());
+                //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
+                new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
+                System.out.println("ok");
+            }
+        });
+
+    }
+
+    public void init() {
+
+        lv_sub = (ListView) findViewById(R.id.lv_sub);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        btn_MainUpdate = (Button) findViewById(R.id.btn_MainUpdate);
+
+
+
+
+
+        setSupportActionBar(toolbar);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         Intent LaLaLa = getIntent();
-        Toast.makeText(this, LaLaLa.getStringExtra("message"), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, LaLaLa.getIntExtra("pid",0)+"\n"+LaLaLa.getIntExtra("user_id",0), Toast.LENGTH_LONG).show();
     }
 
 }

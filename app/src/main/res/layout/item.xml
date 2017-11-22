@@ -54,7 +54,7 @@
             android:id="@+id/it_timeReply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/it_time_post"
+            android:layout_toEndOf="@+id/it_timePost"
             android:text="回帖时间"
             />
 
