@@ -56,8 +56,9 @@ class PostTask extends AsyncTask<String, Integer, String> {
         PostJson postJson = new PostJson();
         postJson.setTitle(strings[0]);
         postJson.setContent(strings[1]);
-        String sendJson = gson.toJson(postJson);
 
+        String sendJson = gson.toJson(postJson);
+        System.out.println("result::"+sendJson.toString());
         HashMap<String, String> header = new HashMap<String, String>();
         header.put("User-ID", strings[2]);
         header.put("Session", strings[3]);
@@ -83,3 +84,5 @@ class PostTask extends AsyncTask<String, Integer, String> {
         }
     }
 }
+
+

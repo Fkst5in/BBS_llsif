@@ -1,8 +1,15 @@
 package com.example.bbs_llsif;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +22,21 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     String user_id;
     String session;
+    List<Sub_List_1> Sub_List;
+    static Context listContext;
+    private Handler listHandler = new Handler();
 
     ListView lv_sub;
     ArrayList<HashMap<String, Object>> mData = new ArrayList<HashMap<String, Object>>();
@@ -33,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        lv_sub = (ListView) findViewById(R.id.lv_sub);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -46,12 +61,22 @@ public class MainActivity extends AppCompatActivity {
         if(!skip) {
             Regist.sentence.finish();
         }
+        listContext = this;
 
-        init();
-        mData = getData();
+
         MyAdapter mAdapter = new MyAdapter(this);
-        lv_sub.setAdapter(mAdapter);
 
+        Gson gson = new Gson();
+        Limit limit = new Limit();
+        limit.setLimit(30);
+        String body = gson.toJson(limit, Limit.class);
+
+        HashMap<String, String> header = new HashMap<String, String>();
+        header.put("User-ID", user_id);
+        header.put("Session", session);
+
+        new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
+        System.out.println("ok");
 
         //按钮 转向PostActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -64,95 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(postIntent);
             }
         });
-    }
-    //方法 getData -> 便利的获取数据
-    private ArrayList<HashMap<String,Object>> getData(){
-        ArrayList<HashMap<String,Object>> listitem = new ArrayList<HashMap<String,Object>>();
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        for(int i=0;i<20;i++) {
-            map.put("ItemTitle", "第"+i+"行");
-            map.put("ItemContent", "第"+i+"行");
-            map.put("ItemUsername", "第"+i+"行");
-            map.put("ItemTimePost", "第"+i+"行");
-            map.put("ItemTimeReply", "第"+i+"行");
-            listitem.add(map);
-        }
-        return listitem;
-    }
-
-    private class MyAdapter extends BaseAdapter{
-
-        private LayoutInflater mInflater;
-
-        public MyAdapter(Context context) {
-            this.mInflater = LayoutInflater.from(context);
-        }
-
-        @Override
-        public int getCount() {
-            return getData().size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ViewHolder holder = null;
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.item, null);
-                holder = new ViewHolder();
-                holder.it_title = (TextView) convertView.findViewById(R.id.it_title);
-                holder.it_content = (TextView) convertView.findViewById(R.id.it_content);
-                holder.it_username = (TextView) convertView.findViewById(R.id.it_username);
-                holder.it_timePost = (TextView) convertView.findViewById(R.id.it_timePost);
-                holder.it_timeReply = (TextView) convertView.findViewById(R.id.it_timeReply);
-                holder.it_BtnDetail = (Button) convertView.findViewById(R.id.it_detail);
-                convertView.setTag(holder);
-            } else{
-                holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
-            }
-
-            holder.it_title.setText(String.valueOf(mData.get(position).get("ItemTitle")));
-            holder.it_title.setText(String.valueOf(mData.get(position).get("ItemTitle")));
-            holder.it_content.setText(String.valueOf(mData.get(position).get("ItemContent")));
-            holder.it_username.setText(String.valueOf(mData.get(position).get("ItemUsername")));
-            holder.it_timePost.setText(String.valueOf(mData.get(position).get("ItemTimePost")));
-            holder.it_timeReply.setText(String.valueOf(mData.get(position).get("ItemTimeReply")));
-
-            holder.it_BtnDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent detail = new Intent(getApplicationContext(), DetailActivity.class);
-                    detail.putExtra("message", "lalalalalalala");
-                    startActivity(detail);
-                }
-            });
-            return convertView;
-        }
-    }
-
-    public final class ViewHolder{
-        public TextView it_title;
-        public TextView it_content;
-        public TextView it_username;
-        public TextView it_timePost;
-        public TextView it_timeReply;
-        public Button it_BtnDetail;
 
 
     }
-
-    private void init() {
-        lv_sub = (ListView) findViewById(R.id.lv_sub);
-    }
-
 }
+
