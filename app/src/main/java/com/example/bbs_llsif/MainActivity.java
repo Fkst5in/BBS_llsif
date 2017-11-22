@@ -42,16 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Handler listHandler = new Handler();
 
-
-    ArrayList<HashMap<String, Object>> mData = new ArrayList<HashMap<String, Object>>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
 
         //获得用户数据（主要是 User_id 和 Session）
         Intent intent = getIntent();
@@ -88,10 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 MyAdapter mAdapter = new MyAdapter(getApplicationContext());
                 //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
                 new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
-                System.out.println("ok");
             }
         });
-
     }
 
     public void init() {
@@ -100,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         btn_MainUpdate = (Button) findViewById(R.id.btn_MainUpdate);
-
 
         setSupportActionBar(toolbar);
 
@@ -113,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(postIntent);
             }
         });
-
-
     }
 }
 

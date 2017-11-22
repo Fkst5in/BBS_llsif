@@ -36,7 +36,6 @@ public class ListThread extends Thread {
     List<Sub_List_1> data;
 
 
-
     public ListThread(String body, HashMap<String, String> header, android.os.Handler listHandler, MyAdapter adapter, ListView listView) {
 
         this.body = body;
@@ -58,8 +57,6 @@ public class ListThread extends Thread {
                  listView.setAdapter(adapter);
              }
          });
-
-
     }
 
     @Override
