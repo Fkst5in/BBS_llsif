@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     public void init() {
 
         lv_sub = (ListView) findViewById(R.id.lv_sub);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         btn_MainUpdate = (Button) findViewById(R.id.btn_MainUpdate);
 

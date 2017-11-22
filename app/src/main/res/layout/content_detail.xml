@@ -9,4 +9,52 @@
     tools:showIn="@layout/activity_detail">
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+
+        app:layout_constraintBottom_toBottomOf="parent"></android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_reply"
+        app:layout_constraintEnd_toStartOf="@id/button"
+        app:layout_constraintBottom_toTopOf="@id/tv_detail1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/send_black"
+        app:layout_constraintStart_toEndOf="@id/editText"
+        app:layout_constraintBottom_toTopOf="@id/tv_detail2"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="267dp"
+
+        tools:layout_editor_absoluteY="78dp" />
+
+    <TextView
+         android:id="@+id/tv_detail1"
+         android:layout_width="fill_parent"
+         android:layout_height="7dp"
+         android:text="@string/tian_feng"
+         app:layout_constraintBottom_toBottomOf="parent" />
+    <TextView
+        android:id="@+id/tv_detail2"
+        android:layout_width="33dp"
+        android:layout_height="7dp"
+        android:text="@string/tian_feng"
+        app:layout_constraintStart_toEndOf="@id/editText"
+        app:layout_constraintBottom_toTopOf="@id/tv_detail1" />
+
+
+
 </android.support.constraint.ConstraintLayout>

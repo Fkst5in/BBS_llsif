@@ -5,6 +5,7 @@
     <color name="colorAccent">#ff4081</color>
     <color name="colorWhite">#ffffff</color>
     <color name="word_black">#000000</color>
+    <color name="color_barText">#515151</color>
 
 
 </resources>
