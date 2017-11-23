@@ -127,7 +127,7 @@ public class ReplyAdapter extends BaseAdapter {
             }
             replyHolder.tv_username.setText(data.getUser_name());
             replyHolder.tv_IdTime.setText((data.getRid()+1)+"楼 | "+data.getInsert_date());
-            replyHolder.tv_username.setText(data.getContent());
+            replyHolder.tv_content.setText(data.getContent());
 
             replyHolder.btn_reply.setOnClickListener(new View.OnClickListener() {
                 @Override
