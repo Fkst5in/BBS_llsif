@@ -49,8 +49,8 @@ public class MyAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ViewHolder holder = null;
+
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.main_item, null);
             holder = new ViewHolder();

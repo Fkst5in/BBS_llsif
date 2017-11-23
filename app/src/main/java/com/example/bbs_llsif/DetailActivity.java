@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -23,11 +25,16 @@ public class DetailActivity extends AppCompatActivity {
     int lz_id;
     String user_id;
     String session;
+    String body;
 
     Button btn_replyMain;
+    Button btn_replyUpdate;
     EditText et_replyMain;
+    ListView lv_reply;
 
     HashMap<String, String> header;
+
+    Handler replyHandler = new Handler();
 
     static Context ReplyContext;
 
@@ -41,18 +48,32 @@ public class DetailActivity extends AppCompatActivity {
         lz_id = intent.getIntExtra("Uid", -1);
         user_id = intent.getStringExtra("user_id");
         session = intent.getStringExtra("session");
+        header = new HashMap<String, String>();
+        header.put("User-ID", user_id);
+        header.put("Session", session);
 
         ReplyContext = this;
+
 
         init();
 
         doIt();
+
+        DetailJson detailJson = new DetailJson();
+        detailJson.setPage(0);
+        detailJson.setPid(pid);
+        body = new Gson().toJson(detailJson, DetailJson.class);
+
+        ReplyAdapter adapter = new ReplyAdapter(getApplicationContext());
+        new ReplyThread(body, header,replyHandler, lv_reply,adapter).start();
     }
 
 
     public void init() {
         btn_replyMain = (Button) findViewById(R.id.btn_replyMain);
+        btn_replyUpdate = (Button) findViewById(R.id.btn_replyUpdate);
         et_replyMain = (EditText) findViewById(R.id.et_replyMain);
+        lv_reply = (ListView) findViewById(R.id.lv_reply);
 
     }
 
@@ -81,6 +102,17 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
                 et_replyMain.setText(null);
+            }
+        });
+
+        btn_replyUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ReplyAdapter adapter = new ReplyAdapter(getApplicationContext());
+                new ReplyThread(body, header,replyHandler, lv_reply,adapter).start();
+
+                Toast.makeText(getApplicationContext(),"刷新成功",Toast.LENGTH_SHORT).show();
             }
         });
 

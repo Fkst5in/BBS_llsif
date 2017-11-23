@@ -36,6 +36,7 @@ public class ListThread extends Thread {
     List<Sub_List_1> data;
 
 
+
     public ListThread(String body, HashMap<String, String> header, android.os.Handler listHandler, MyAdapter adapter, ListView listView) {
 
         this.body = body;
@@ -45,7 +46,7 @@ public class ListThread extends Thread {
         this.listView = listView;
     }
 
-    private void dopsot() {
+    private void doPost() {
          String result = Poster.post(url, body, header);
 
          Sub_List_0 sub_list_0 = new Gson().fromJson(result, Sub_List_0.class);
@@ -62,6 +63,6 @@ public class ListThread extends Thread {
     @Override
     public void run() {
         super.run();
-        dopsot();
+        doPost();
     }
 }

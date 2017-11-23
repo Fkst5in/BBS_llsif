@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     FloatingActionButton fab;
     Button btn_MainUpdate;
-    HashMap<String, String> header;
     String body;
 
+
+    HashMap<String, String> header;
 
     private Handler listHandler = new Handler();
 
