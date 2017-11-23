@@ -6,4 +6,5 @@
     <string name="title_AppBar">不可描述の帖子</string>
     <string name="main_update">刷新</string>
     <string name="hint_reply">元芳？你怎么看</string>
+    <string name="line">---------------------------------------------------------------------------------------------------</string>
 </resources>
