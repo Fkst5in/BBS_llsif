@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,8 +21,10 @@ public class MyAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private java.util.List<Sub_List_1> List;
     private Context context;
+    private HashMap<String, String> header;
 
-    public MyAdapter(Context context) {
+    public MyAdapter(Context context,HashMap<String, String> header) {
+        this.header = header;
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
     }
@@ -73,9 +76,11 @@ public class MyAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Intent detail = new Intent(context, DetailActivity.class);
-                System.out.println("user_id:"+sub_list_1.getUser_id()+"\npid:"+sub_list_1.getPid());
+                //System.out.println("user_id:"+sub_list_1.getUser_id()+"\npid:"+sub_list_1.getPid());
                 detail.putExtra("pid", sub_list_1.getPid());
-                detail.putExtra("user_id", sub_list_1.getUser_id());
+                detail.putExtra("Uid", sub_list_1.getUser_id()); //楼主ID
+                detail.putExtra("user_id", header.get("User_ID")); //用户ID
+                detail.putExtra("session", header.get("Session"));
                 context.startActivity(detail);
             }
         });

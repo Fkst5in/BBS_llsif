@@ -20,21 +20,21 @@
         app:layout_constraintBottom_toBottomOf="parent"></android.support.v7.widget.Toolbar>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_replyMain"
         android:layout_width="297dp"
         android:layout_height="wrap_content"
         android:hint="@string/hint_reply"
-        app:layout_constraintEnd_toStartOf="@id/button"
+        app:layout_constraintEnd_toStartOf="@id/btn_replyMain"
         app:layout_constraintBottom_toTopOf="@id/tv_detail1"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_replyMain"
         android:layout_width="33dp"
         android:layout_height="30dp"
         android:background="@mipmap/send_black"
-        app:layout_constraintStart_toEndOf="@id/editText"
+        app:layout_constraintStart_toEndOf="@id/et_replyMain"
         app:layout_constraintBottom_toTopOf="@id/tv_detail2"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="267dp"
@@ -52,7 +52,7 @@
         android:layout_width="33dp"
         android:layout_height="7dp"
         android:text="@string/tian_feng"
-        app:layout_constraintStart_toEndOf="@id/editText"
+        app:layout_constraintStart_toEndOf="@id/et_replyMain"
         app:layout_constraintBottom_toTopOf="@id/tv_detail1" />
 
 

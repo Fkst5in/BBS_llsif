@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     FloatingActionButton fab;
     Button btn_MainUpdate;
+    HashMap<String, String> header;
+    String body;
+
 
     private Handler listHandler = new Handler();
 
@@ -64,26 +67,18 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Limit limit = new Limit();
         limit.setLimit(30);
-        final String body = gson.toJson(limit, Limit.class);
+        body = gson.toJson(limit, Limit.class);
         //获得http header文件//以HashMap<String, String> header形式
-         final HashMap<String, String> header = new HashMap<String, String>();
-        header.put("User-ID", user_id);
+        header = new HashMap<String, String>();
+        header.put("User_ID", user_id);
         header.put("Session", session);
         //获得mAdapter对象
-        MyAdapter mAdapter = new MyAdapter(this);
+        MyAdapter mAdapter = new MyAdapter(this,header);
         //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
         new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
         System.out.println("ok");
 
-        btn_MainUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //获得mAdapter对象
-                MyAdapter mAdapter = new MyAdapter(getApplicationContext());
-                //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
-                new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
-            }
-        });
+
     }
 
     public void init() {
@@ -91,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         lv_sub = (ListView) findViewById(R.id.lv_sub);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         btn_MainUpdate = (Button) findViewById(R.id.btn_MainUpdate);
+
 
         setSupportActionBar(toolbar);
 
@@ -101,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
                 postIntent.putExtra("user_id", user_id);
                 postIntent.putExtra("session", session);
                 startActivity(postIntent);
+            }
+        });
+
+        btn_MainUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //获得mAdapter对象
+                MyAdapter mAdapter = new MyAdapter(getApplicationContext(),header);
+                //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
+                new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
             }
         });
     }

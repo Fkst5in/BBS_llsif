@@ -10,10 +10,10 @@
 
     <ListView
         android:id="@+id/lv_sub"
+
         android:layout_width="330dp"
         android:layout_height="1500dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/list"
         tools:ignore="MissingConstraints" />
 </RelativeLayout>
