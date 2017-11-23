@@ -52,7 +52,7 @@ public class MyAdapter extends BaseAdapter{
 
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item, null);
+            convertView = mInflater.inflate(R.layout.main_item, null);
             holder = new ViewHolder();
             holder.it_title = (TextView) convertView.findViewById(R.id.it_title);
             holder.it_content = (TextView) convertView.findViewById(R.id.it_content);
@@ -68,9 +68,9 @@ public class MyAdapter extends BaseAdapter{
         final Sub_List_1 sub_list_1 = List.get(position);
         holder.it_title.setText(String.valueOf(sub_list_1.getTitle())+" ");
         holder.it_content.setText(String.valueOf(sub_list_1.getSummary()));
-        holder.it_username.setText("by "+String.valueOf(sub_list_1.getUser_name()));
+        holder.it_username.setText("by: "+String.valueOf(sub_list_1.getUser_name()));
         holder.it_timePost.setText(String.valueOf(sub_list_1.getInsert_date()));
-        holder.it_timeReply.setText(String.valueOf(sub_list_1.getLast_reply()));
+        holder.it_timeReply.setText("最新： "+String.valueOf(sub_list_1.getLast_reply()));
 
         holder.it_BtnDetail.setOnClickListener(new View.OnClickListener() {
             @Override

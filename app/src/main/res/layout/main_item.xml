@@ -20,7 +20,7 @@
     <RelativeLayout
         android:id="@+id/RL_2"
         android:layout_below="@+id/tv_MainList_5"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
 
         android:layout_height="wrap_content">
         <TextView
@@ -50,11 +50,7 @@
             android:layout_alignParentTop="true"
             android:text="@string/tian_feng" />
 
-        <Button
-            android:id="@+id/it_detail"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:background="#00000000"/>
+
 
         <TextView
             android:id="@+id/it_title"
@@ -83,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_MainList_1"
             android:textSize="18dp"
-            android:text="这里是内jskljfskljfkljsfljsklfjkljsklfjklsjfljlflajsfljslajflsjlfjsfjsljfgjreofjosnvoshifowhgklsgljslkgjl容"
+            android:text="d "
 
             />
 
@@ -105,6 +101,13 @@
             android:textSize="14dp"
             android:text="回帖时间"
             />
+
+        <Button
+            android:id="@+id/it_detail"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+
+            android:background="#00000000"/>
 
     </RelativeLayout>
     

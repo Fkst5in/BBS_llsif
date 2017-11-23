@@ -87,6 +87,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 }
+
+//异步任务 回复
 class ReplyTask extends AsyncTask<String, Integer, String> {
 
     @Override
