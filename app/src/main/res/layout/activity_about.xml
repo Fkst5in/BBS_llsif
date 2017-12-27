@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bbs_llsif.About">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/tv_MainAppBar_1"
+                android:layout_alignParentTop="true"
+                android:layout_width="fill_parent"
+                android:layout_height="7dp"
+                android:text="@string/tian_feng" />
+            <TextView
+                android:id="@+id/tv_MainAppBar_2"
+                android:layout_alignParentBottom="true"
+                android:layout_width="fill_parent"
+                android:layout_height="7dp"
+                android:layout_below="@+id/tv_MainAppBar"
+                android:text="@string/tian_feng" />
+            <TextView
+                android:id="@+id/tv_MainAppBar_3"
+                android:layout_alignParentEnd="true"
+                android:layout_width="20dp"
+                android:layout_height="37dp"
+                android:text="@string/tian_feng" />
+
+            <TextView
+                android:id="@+id/tv_MainAppBar_4"
+                android:layout_alignParentStart="true"
+                android:layout_width="10dp"
+                android:layout_height="37dp"
+                android:text="@string/tian_feng" />
+
+
+            <Button
+                android:id="@+id/about_btn_back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_toRightOf="@+id/tv_MainAppBar_4"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/back_gruy" />
+
+            <TextView
+                android:id="@+id/tv_MainAppBar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/tv_MainAppBar_3"
+
+                android:layout_below="@+id/tv_MainAppBar_1"
+                android:gravity="center"
+                android:text="关于"
+                android:textColor="@color/color_barText"
+                android:textSize="23dp" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>
