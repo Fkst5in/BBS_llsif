@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -73,6 +74,9 @@ public class DetailActivity extends AppCompatActivity {
         btn_replyMain = (Button) findViewById(R.id.btn_replyMain);
         btn_replyUpdate = (Button) findViewById(R.id.btn_replyUpdate);
         et_replyMain = (EditText) findViewById(R.id.et_replyMain);
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(et_replyMain.getWindowToken(), 0);
+
         lv_reply = (ListView) findViewById(R.id.lv_reply);
 
     }

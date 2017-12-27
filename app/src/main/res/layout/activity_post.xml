@@ -1,71 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.bbs_llsif.PostActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="fill_parent"
-        android:layout_height="49dp"
-        android:background="?attr/colorPrimaryDark"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/btn_post"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
-        android:background="@mipmap/success"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/toolbar3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/toolbar3"
-        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="317dp"
         android:layout_height="460dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="72dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="主题：" />
 
         <EditText
-            android:id="@+id/et_title"
+            android:id="@+id/post_et_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/et"
-            android:textSize="30dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="内容：" />
-
-        <EditText
-            android:id="@+id/et_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/et"
+            android:layout_height="45dp"
             android:ems="10"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:minLines="18" />
+            android:textSize="22dp"
+            android:inputType="textPersonName"
+            android:background="@color/color_transparent"
+            android:hint="标题还是长点好~~~" />
 
+        <TextView
+            android:id="@+id/post_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:background="@color/color_transparent"
+        />
+        <EditText
+            android:id="@+id/post_et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:background="@color/color_transparent"
+            android:hint="所以你想说啥呢？"
+            android:maxLines="50"
+
+            />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/tv_MainAppBar_1"
+                android:layout_alignParentTop="true"
+                android:layout_width="fill_parent"
+                android:layout_height="7dp"
+                android:text="@string/tian_feng" />
+            <TextView
+                android:id="@+id/tv_MainAppBar_2"
+                android:layout_alignParentBottom="true"
+                android:layout_width="fill_parent"
+                android:layout_height="7dp"
+                android:layout_below="@+id/tv_MainAppBar"
+                android:text="@string/tian_feng" />
+            <TextView
+                android:id="@+id/tv_MainAppBar_3"
+                android:layout_alignParentEnd="true"
+                android:layout_width="13dp"
+                android:layout_height="37dp"
+                android:text="@string/tian_feng" />
+
+            <TextView
+                android:id="@+id/tv_MainAppBar_4"
+                android:layout_alignParentStart="true"
+                android:layout_width="10dp"
+                android:layout_height="37dp"
+                android:text="@string/tian_feng" />
+
+
+            <Button
+                android:id="@+id/post_btn_send"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_toLeftOf="@+id/tv_MainAppBar_3"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/send_gruy_2" />
+
+            <Button
+                android:id="@+id/post_btn_back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_toRightOf="@+id/tv_MainAppBar_4"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/close_gruy_3" />
+
+            <TextView
+                android:id="@+id/tv_MainAppBar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/post_btn_send"
+                android:layout_toRightOf="@+id/post_btn_back"
+                android:layout_below="@+id/tv_MainAppBar_1"
+                android:gravity="center"
+                android:text="编辑内容"
+                android:textColor="@color/color_barText"
+                android:textSize="23dp" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -23,7 +23,7 @@
     <EditText
         android:id="@+id/et_password"
         android:layout_width="fill_parent"
-        android:layout_height="39dp"
+        android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="密码"

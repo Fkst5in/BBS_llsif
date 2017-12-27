@@ -7,4 +7,5 @@
     <string name="main_update">刷新</string>
     <string name="hint_reply">元芳？你怎么看</string>
     <string name="line">---------------------------------------------------------------------------------------------------</string>
+    <string name="title_activity_about">About</string>
 </resources>

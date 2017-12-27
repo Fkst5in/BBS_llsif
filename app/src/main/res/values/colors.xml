@@ -6,6 +6,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="word_black">#000000</color>
     <color name="color_barText">#515151</color>
+    <color name="color_transparent">#00000000</color>
 
 
 </resources>
