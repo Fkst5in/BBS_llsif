@@ -2,7 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
+        war_B {
+            keyAlias 'BBSLL'
+            keyPassword '3d4c4ae294cdcf93148bc9c486cc52b7f583d050'
+            storeFile file('C:/Users/ad_j/AndroidStudioProjects/KeyStore/BBSLL.jks')
+            storePassword '9b5a6c9aca0148c7c0eb09d403e2fdf28ca79f4b'
         }
     }
     compileSdkVersion 26
@@ -18,7 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.war_B
         }
     }
 }

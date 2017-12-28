@@ -30,6 +30,7 @@ public class DetailActivity extends AppCompatActivity {
 
     Button btn_replyMain;
     Button btn_replyUpdate;
+    Button btn_back;
     EditText et_replyMain;
     ListView lv_reply;
 
@@ -73,9 +74,9 @@ public class DetailActivity extends AppCompatActivity {
     public void init() {
         btn_replyMain = (Button) findViewById(R.id.btn_replyMain);
         btn_replyUpdate = (Button) findViewById(R.id.btn_replyUpdate);
+        btn_back = (Button) findViewById(R.id.de_btn_back);
         et_replyMain = (EditText) findViewById(R.id.et_replyMain);
-        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(et_replyMain.getWindowToken(), 0);
+        et_replyMain.clearFocus();
 
         lv_reply = (ListView) findViewById(R.id.lv_reply);
 
@@ -117,6 +118,13 @@ public class DetailActivity extends AppCompatActivity {
                 new ReplyThread(body, header,replyHandler, lv_reply,adapter).start();
 
                 Toast.makeText(getApplicationContext(),"刷新成功",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
