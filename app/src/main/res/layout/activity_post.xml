@@ -8,10 +8,12 @@
 
 
     <LinearLayout
-        android:layout_width="317dp"
-        android:layout_height="460dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="23dp"
+        android:layout_marginEnd="23dp"
         android:layout_marginTop="72dp"
+        android:layout_marginBottom="18dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,7 +43,7 @@
             android:ems="10"
             android:inputType="textMultiLine"
             android:background="@color/color_transparent"
-            android:hint="所以你想说啥呢？"
+            android:hint="说点啥好呢？"
             android:maxLines="50"
             android:gravity="start"
             />
