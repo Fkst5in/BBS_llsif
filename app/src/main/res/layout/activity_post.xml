@@ -46,6 +46,7 @@
             android:maxLines="50"
 
             />
+
     </LinearLayout>
 
     <android.support.design.widget.AppBarLayout

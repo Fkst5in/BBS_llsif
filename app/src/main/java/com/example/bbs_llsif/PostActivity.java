@@ -21,6 +21,7 @@ public class PostActivity extends AppCompatActivity {
     EditText et_title,et_content;
     Button btn_post;
     Button btn_close;
+    Button btn_about;
 
     static Context postcontext;
 
@@ -43,6 +44,7 @@ public class PostActivity extends AppCompatActivity {
         et_content = (EditText) findViewById(R.id.post_et_content);
         btn_post = (Button) findViewById(R.id.post_btn_send);
         btn_close = (Button) findViewById(R.id.post_btn_back);
+        btn_about = (Button) findViewById(R.id.button);
 
 
         postcontext=this;
@@ -72,6 +74,13 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        btn_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent about = new Intent(getApplicationContext(), About.class);
             }
         });
     }

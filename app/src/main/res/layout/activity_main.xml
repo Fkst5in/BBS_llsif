@@ -54,6 +54,12 @@
                 android:text="@string/title_AppBar"
                 android:textColor="@color/color_barText"
                 android:textSize="23dp" />
+
+            <Button
+                android:id="@+id/main_btn_about"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"/>
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
 
