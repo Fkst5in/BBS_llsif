@@ -32,19 +32,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:background="@color/color_transparent"
         />
         <EditText
             android:id="@+id/post_et_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:background="@color/color_transparent"
             android:hint="所以你想说啥呢？"
             android:maxLines="50"
-
+            android:gravity="start"
             />
 
     </LinearLayout>
