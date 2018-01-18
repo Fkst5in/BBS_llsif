@@ -39,20 +39,16 @@ public class ReplyThread extends Thread {
     private void doPost() {
 
          String result = Poster.post(url, body, header);
-         System.out.println("result: "+result);
         Sub_Reply_0 sub_reply_0 = new Gson().fromJson(result, Sub_Reply_0.class);
         //Sub_Reply_1 sub_reply_1 =sub_reply_0.getPost();
         //sub_reply_1.setRid(0);
         dataS.add(sub_reply_0.getPost());
         dataS.addAll(sub_reply_0.getReplies());
-        System.out.println("dataS: "+dataS.size());
         replyHandler.post(new Runnable() {
             @Override
             public void run() {
                 adapter.setData(dataS);
-                System.out.println("OK");
                 listView.setAdapter(adapter);
-                System.out.println("wancheng");
             }
         });
 

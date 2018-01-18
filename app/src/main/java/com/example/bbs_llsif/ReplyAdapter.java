@@ -73,20 +73,16 @@ public class ReplyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        System.out.println("OK0");
-        View setView = null;
 
+        View setView = null;
         View MainView = null;
         View ReplyView = null;
-        System.out.println("OK0");
+
         Sub_Reply_1 data = List.get(position);
-        System.out.println("rid: "+data.getRid());
         currentType = getItemViewType(position);
         if (currentType==TYPE_Main) {
             MainHolder mainHolder = null;
-            System.out.println("OK1");
             if (convertView == null) {
-                System.out.println("OK1");
                 mainHolder = new MainHolder();
                 MainView = LayoutInflater.from(context).inflate(R.layout.detail_item, null);
                 mainHolder.tv_title = (TextView) MainView.findViewById(R.id.it_title);
@@ -96,7 +92,6 @@ public class ReplyAdapter extends BaseAdapter {
                 mainHolder.tv_timeReply = (TextView) MainView.findViewById(R.id.it_timeReply);
                 MainView.setTag(mainHolder);
                 convertView = MainView;
-                System.out.println("OK1");
             }
             else if(currentType==TYPE_Main){
                 mainHolder = (MainHolder) convertView.getTag();
@@ -106,13 +101,10 @@ public class ReplyAdapter extends BaseAdapter {
             mainHolder.tv_timePost.setText(data.getInsert_date());
             mainHolder.tv_content.setText(data.getContent());
             mainHolder.tv_timeReply.setText(data.getLast_reply());
-            System.out.println("OK");
 
         } else{
-            System.out.println("O_K");
             ReplyHolder replyHolder = null;
             if (convertView == null) {
-                System.out.println("O_K");
                 replyHolder = new ReplyHolder();
                 ReplyView = LayoutInflater.from(context).inflate(R.layout.reply_item, null);
                 replyHolder.tv_username = (TextView) ReplyView.findViewById(R.id.rit_name);
@@ -122,7 +114,6 @@ public class ReplyAdapter extends BaseAdapter {
                 ReplyView.setTag(replyHolder);
                 convertView = ReplyView;
             } else {
-                System.out.println("O_K");
                 replyHolder = (ReplyHolder) convertView.getTag();
             }
             replyHolder.tv_username.setText(data.getUser_name());

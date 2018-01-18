@@ -95,8 +95,6 @@ public class DetailActivity extends AppCompatActivity {
                     replyJosn.setPid(pid);
                     replyJosn.setTo_rid(0);
                     replyJosn.setContent(et_replyMain.getText().toString());
-                    System.out.println("content:"+et_replyMain.getText().toString());
-                    System.out.println("pid: " + pid);
                     String body = new Gson().toJson(replyJosn, ReplyJosn.class);
 
                     ReplyTask replyTask = new ReplyTask();

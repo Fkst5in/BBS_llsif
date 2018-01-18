@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         MyAdapter mAdapter = new MyAdapter(this,header);
         //建立http链接，并在其中的handler.post 中完成绑定和更新 ListView lv_Sub
         new ListThread(body,header,listHandler,mAdapter,lv_sub).start();
-        System.out.println("ok");
 
 
     }
