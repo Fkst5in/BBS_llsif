@@ -84,7 +84,7 @@
             android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            app:srcCompat="@mipmap/ic_launcher"
+            app:srcCompat="@mipmap/l_balck"
            />
         <TextView
             android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:gravity="center"
-            android:text="猫须工作室\n@2017"
+            android:text="@string/inf"
             />
     </RelativeLayout>
 

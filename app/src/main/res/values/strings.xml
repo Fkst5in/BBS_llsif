@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">不可描述の论坛</string>
+    <string name="app_name">L</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="tian_feng"> </string>
@@ -8,5 +8,5 @@
     <string name="hint_reply">元芳？你怎么看</string>
     <string name="line">---------------------------------------------------------------------------------------------------</string>
     <string name="title_activity_about">About</string>
-    <string name="inf">猫须工作室\n@2017</string>
+    <string name="inf">猫须制作组\n@2017</string>
 </resources>
